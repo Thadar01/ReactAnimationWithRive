@@ -6,7 +6,7 @@ import { Howl } from "howler";
 const ToyStore = () => {
   const { rive, RiveComponent } = useRive({
     src: "./toystoreanimation.riv",
-    artboard: "ToyStoreArtBoard",
+    artboard: "ToyStoreArtBoard 2",
     stateMachines: "State Machine 1",
     autoplay: true,
     onStateChange: (event) => {

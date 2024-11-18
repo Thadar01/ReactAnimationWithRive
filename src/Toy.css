@@ -1,0 +1,13 @@
+.element {
+    height: 2000px; /* Example height */
+    overflow: scroll; /* Allow scrolling */
+    scrollbar-width: none; /* Hides scrollbar in Firefox */
+    -ms-overflow-style: none; /* Hides scrollbar in IE and Edge */
+  
+  }
+  
+  .element::-webkit-scrollbar {
+    width: 0; /* Hides scrollbar in Chrome, Safari, and Opera */
+    height: 0; /* Optional if horizontal scrolling is possible */
+  }
+  
