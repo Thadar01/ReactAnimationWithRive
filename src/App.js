@@ -1,14 +1,12 @@
 
 import './App.css';
-import CoffeeShop from './CoffeeShop';
-import RoadMap from './RoadMap';
-import Robot from './Robot';
 
-import ToyStore from './ToyStore';
+import LargeClassroom from './LagreClassroom';
+
 
 function App() {
   return (
-<RoadMap/> );
+<LargeClassroom/> );
 }
 
 export default App;
