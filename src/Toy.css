@@ -3,6 +3,8 @@
     overflow: scroll; /* Allow scrolling */
     scrollbar-width: none; /* Hides scrollbar in Firefox */
     -ms-overflow-style: none; /* Hides scrollbar in IE and Edge */
+    display: flex;
+    justify-content: center;
   
   }
   

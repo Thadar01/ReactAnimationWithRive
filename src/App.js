@@ -1,12 +1,13 @@
 
 import './App.css';
+import InfiniteScroll from './InfiniteScroll';
+import RoadMap from './RoadMap';
 
-import LargeClassroom from './LagreClassroom';
 
 
 function App() {
   return (
-<LargeClassroom/> );
+<RoadMap/> );
 }
 
 export default App;
