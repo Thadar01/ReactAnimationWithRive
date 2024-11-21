@@ -13,19 +13,41 @@ const RiveComponentWrapper = ({ index, run, data }) => {
     }
   });
 const complete1=useStateMachineInput(rive, "State Machine 4", "complete1");
+const complete2=useStateMachineInput(rive, "State Machine 4", "complete2");
+const complete3=useStateMachineInput(rive, "State Machine 4", "complete3");
+const complete4=useStateMachineInput(rive, "State Machine 4", "complete4");
+const group1=useStateMachineInput(rive, "State Machine 4", "group1");
+const group2=useStateMachineInput(rive, "State Machine 4", "group2");
+const group3=useStateMachineInput(rive, "State Machine 4", "group3");
+const group4=useStateMachineInput(rive, "State Machine 4", "group4");
 
 
   useEffect(() => {
-    if (rive) {
-      // Set initial text values for each run
+    if (rive && complete1 && complete2 && complete3 && complete4 &&group1 &&group2 && group3 && group4) {
+
+      const groups = [group1, group2, group3, group4];
+
       for (let i = 0; i < data.length; i++) {
-        rive.setTextRunValue(run[i], data[i].unit);
-        if (data[i].status === "complete") {
-          console.log('Status is complete for:', data[i].unit);
-        }
+        if (groups[i]) groups[i].value = true;
       }
-      if(complete1){
-        console.log("it is complete1")
+            for (let i = 0; i < data.length; i++) {
+        rive.setTextRunValue(run[i], data[i].unit);
+        const filterComplete = data.filter(item => item.status === "complete");
+        for(let j=0; j< filterComplete.length; j++){
+         if(data[0]&&filterComplete[j].unit===data[0].unit){
+          complete1.value=true
+         }
+         if(data[1]&&filterComplete[j].unit===data[1].unit){
+          complete2.value=true
+         }
+         if(data[2]&&filterComplete[j].unit===data[2].unit){
+          complete3.value=true
+         }
+         if(data[3]&&filterComplete[j].unit===data[3].unit){
+          complete4.value=true
+         }
+        }
+       
       }
       const buttonMapping = {
         click1: 0,
@@ -42,7 +64,7 @@ const complete1=useStateMachineInput(rive, "State Machine 4", "complete1");
         }
       });
     }
-  }, [rive, data, run]);
+  }, [rive, data, run,complete1,complete2,complete3,complete4,group1,group2,group3,group4]);
 
   return (
     <div className="rive-container">
@@ -57,21 +79,15 @@ const Map = () => {
     { unit: '2', status: 'complete' },
     { unit: '3', status: 'complete' },
     { unit: '4', status: 'not complete' },
-    { unit: '5', status: 'complete' },
-    { unit: '6', status: 'complete' },
-    { unit: '7', status: 'not complete' },
-    { unit: '8', status: 'not complete' },
-    { unit: '9', status: 'not complete' },
-    { unit: '10', status: 'not complete' },
-    { unit: '11', status: 'not complete' },
-    { unit: '12', status: 'not complete' },
-    { unit: '13', status: 'not complete' },
-    { unit: '14', status: 'not complete' },
-    { unit: '15', status: 'not complete' },
-    { unit: '16', status: 'not complete' }
+    { unit: '5', status: 'not complete' },
+    { unit: '6', status: 'not complete' },
+    // { unit: '7', status: 'not complete' },
+    // { unit: '8', status: 'not complete' },
+    // { unit: '9', status: 'not complete' },
+    // { unit: '10', status: 'not complete' },
+    // { unit: '11', status: 'complete' },
   ]
   
-
   function splitMainData(data, size = 4) {
     const result = [];
     for (let i = 0; i < data.length; i += size) {
@@ -81,7 +97,6 @@ const Map = () => {
   }
 
   const splitData = splitMainData(data);
-
   const run = ['oneRun', 'twoRun', 'threeRun', 'fourRun'];
 
   return (

@@ -1,5 +1,5 @@
 .element {
-    height: 1000px; /* Example height */
+    height: 800px; /* Example height */
     overflow: scroll; /* Allow scrolling */
     scrollbar-width: none; /* Hides scrollbar in Firefox */
     -ms-overflow-style: none; /* Hides scrollbar in IE and Edge */
@@ -15,7 +15,6 @@
     display: flex;
     justify-content: center;       /* Center the RiveComponent horizontally */
     align-items: center;   
-    background-color: aqua;        /* Center the RiveComponent vertically */
   }
   .element::-webkit-scrollbar {
     width: 0; /* Hides scrollbar in Chrome, Safari, and Opera */
