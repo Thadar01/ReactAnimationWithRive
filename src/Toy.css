@@ -1,13 +1,22 @@
 .element {
-    height: 2000px; /* Example height */
+    height: 1000px; /* Example height */
     overflow: scroll; /* Allow scrolling */
     scrollbar-width: none; /* Hides scrollbar in Firefox */
     -ms-overflow-style: none; /* Hides scrollbar in IE and Edge */
     display: flex;
-    justify-content: center;
+   
+    flex-direction: column;
+    gap:0
   
   }
-  
+  .rive-container {
+    width: 100%;                    /* Each RiveComponent takes 50% of the width */
+    height: 60%;                   /* Each RiveComponent takes 50% of the height */
+    display: flex;
+    justify-content: center;       /* Center the RiveComponent horizontally */
+    align-items: center;   
+    background-color: aqua;        /* Center the RiveComponent vertically */
+  }
   .element::-webkit-scrollbar {
     width: 0; /* Hides scrollbar in Chrome, Safari, and Opera */
     height: 0; /* Optional if horizontal scrolling is possible */

@@ -1,13 +1,12 @@
 
 import './App.css';
-import InfiniteScroll from './InfiniteScroll';
-import RoadMap from './RoadMap';
+import Map from './Map';
 
 
 
 function App() {
   return (
-<RoadMap/> );
+<Map/> );
 }
 
 export default App;
