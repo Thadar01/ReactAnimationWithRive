@@ -1,12 +1,12 @@
 
 import './App.css';
-import Map from './Map';
+import Memory from './Memory';
 
 
 
 function App() {
   return (
-<Map/> );
+<Memory/> );
 }
 
 export default App;
