@@ -1,5 +1,7 @@
 import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { easyData,hardData,mediumData } from "./memoryData";
+import { Howl } from "howler";
 
 const Memory = () => {
   const { rive, RiveComponent } = useRive({
@@ -8,6 +10,20 @@ const Memory = () => {
     stateMachines: "State Machine 2",
     autoplay: true,
   });
+  const[data,setData]=useState(easyData)
+
+const audioPlayers = data.map((card) => {
+  if (card.audio) {
+    return new Howl({
+      src: [card.audio],
+      volume: 1.0,
+      onloaderror: (id, error) => console.error("Audio load error:", error),
+      onplayerror: (id, error) => console.error("Audio play error:", error),
+    });
+  }
+  return null;
+});
+
 
   const inputs = [
     useStateMachineInput(rive, "State Machine 2", "card1close"),
@@ -24,16 +40,6 @@ const Memory = () => {
     useStateMachineInput(rive, "State Machine 2", "disappear4"),
     useStateMachineInput(rive, "State Machine 2", "disappear5"),
     useStateMachineInput(rive, "State Machine 2", "disappear6"),
-  ];
-
-
-  const data = [
-    { id: 1, text: "apple" },
-    { id: 2, text: "orange" },
-    { id: 3, text: "apple" },
-    { id: 4, text: "grape" },
-    { id: 5, text: "orange" },
-    { id: 6, text: "grape" },
   ];
 
   const run = [
@@ -54,25 +60,56 @@ const Memory = () => {
         inputs.forEach((input) => (input.value = true));
       }, 5000);
 
-      data.forEach((item, i) => {
-        if (rive && run[i]) {
-          rive.setTextRunValue(run[i], item.text);
-        }
-      });
 
+
+      if(data===easyData){
+        data.forEach((item, i) => {
+          if(item.image && rive && run[i]){
+               rive.setTextRunValue(run[i], 'Image');
+  
+          }
+        
+        });
+      }
+      else if(data===mediumData){
+        data.forEach((item, i) => {
+          if(item.image && rive && run[i]){
+               rive.setTextRunValue(run[i], 'Image');
+  
+          }
+         else if (rive && run[i]) {
+            rive.setTextRunValue(run[i], item.text);
+          }
+        });
+      }else{
+        data.forEach((item, i) => {
+          if(item.audio && rive && run[i]){
+               rive.setTextRunValue(run[i], 'Audio');
+          }
+         else if (rive && run[i]) {
+            rive.setTextRunValue(run[i], item.text);
+          }
+        });
+      }
+ 
       // Listen for state changes
       rive.on("statechange", (event) => {
         const cardMapping = {
-          openCard1: { data: data[0], input: inputs[0],disappear:disappears[0] },
-          openCard2: { data: data[1], input: inputs[1],disappear:disappears[1] },
-          openCard3: { data: data[2], input: inputs[2] ,disappear:disappears[2]},
-          openCard4: { data: data[3], input: inputs[3],disappear:disappears[3] },
-          openCard5: { data: data[4], input: inputs[4],disappear:disappears[4] },
-          openCard6: { data: data[5], input: inputs[5],disappear:disappears[5] },
+          openCard1: { data: data[0], input: inputs[0], disappear: disappears[0], audio: audioPlayers[0] },
+          openCard2: { data: data[1], input: inputs[1], disappear: disappears[1], audio: audioPlayers[1] },
+          openCard3: { data: data[2], input: inputs[2], disappear: disappears[2], audio: audioPlayers[2] },
+          openCard4: { data: data[3], input: inputs[3], disappear: disappears[3], audio: audioPlayers[3] },
+          openCard5: { data: data[4], input: inputs[4], disappear: disappears[4], audio: audioPlayers[4] },
+          openCard6: { data: data[5], input: inputs[5], disappear: disappears[5], audio: audioPlayers[5] },
         };
 
         const openedCard = cardMapping[event.data[0]];
         if (openedCard) {
+          if (openedCard.audio) {
+            openedCard.audio.play();
+            console.log("playAudio")
+          }
+
           if (
             !openedCards.current.some(
               (card) => card.data.id === openedCard.data.id
@@ -105,6 +142,18 @@ const Memory = () => {
               }
             }
           }
+        }
+
+        if(event.data.find((item)=>item==="Easy")){
+        setData(easyData)
+        console.log("easy",easyData)
+        }
+        if(event.data.find((item)=>item==="Medium")){
+        setData(mediumData)
+        console.log('medium',mediumData)
+        } if(event.data.find((item)=>item==="Hard")){
+        setData(hardData)
+        console.log('hard',hardData)
         }
       });
     }
