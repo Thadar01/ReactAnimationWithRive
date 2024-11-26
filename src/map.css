@@ -1,0 +1,10 @@
+.element {
+    height: 500px; /* Example height */
+    overflow: auto; /* Enable scrolling */
+    scrollbar-width: none; /* Hides scrollbar in Firefox */
+    -ms-overflow-style: none; /* Hides scrollbar in IE and Edge */
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  
