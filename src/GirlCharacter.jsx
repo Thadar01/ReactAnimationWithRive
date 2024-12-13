@@ -21,6 +21,7 @@ const GirlCharacter = () => {
   const disgustTalk = useStateMachineInput(rive, "State Machine 1", "isDisgustTalk");
   const headMove=useStateMachineInput(rive, "State Machine 1", "isHeadMove");
 
+  
   const handleEmotionClick = (emotion) => {
     setActiveEmotion(emotion);
   };
@@ -29,6 +30,9 @@ const GirlCharacter = () => {
       headMove.value = isMove;
     }
   }, [isMove, headMove]);
+  if(rive && rive.activeArtboard){
+    console.log(rive.activeArtboard.children)
+  }
   useEffect(() => {
     if (rive) {
 
